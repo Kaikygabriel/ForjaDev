@@ -14,6 +14,7 @@ public class Comment : Entity
         MemberId = memberId;
         PostId = postId;
         Message = message;
+        CreateAt = DateTime.UtcNow;
     }
 
     public Guid MemberId { get; init; }
@@ -23,8 +24,10 @@ public class Comment : Entity
     public Post Post { get; init; }
 
     public string Message { get;private set; }
+    public DateTime CreateAt { get; init; }
 
-    public static class Factory
+    
+    public static class Factory 
     {
         public static Result<Comment> Create(Guid memberId, Guid postId, string message)
             => Result<Comment>.Success(new(memberId, postId, message));

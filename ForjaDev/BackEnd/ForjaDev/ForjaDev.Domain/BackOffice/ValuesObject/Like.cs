@@ -1,9 +1,10 @@
 using ForjaDev.Domain.BackOffice.Commum;
 using ForjaDev.Domain.BackOffice.Entities;
+using ForjaDev.Domain.BackOffice.Entities.Abstraction;
 
 namespace ForjaDev.Domain.BackOffice.ValuesObject;
 
-public class Like
+public class Like : Entity
 {
     private Like()
     {
