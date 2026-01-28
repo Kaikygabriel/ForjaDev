@@ -16,3 +16,8 @@ Principais funcionalidades:
 Stack:
 ASP.NET Core • Clean Architecture • EF Core • PostgreSQL • Blazor (em evolução)
 
+🚧 Em desenvolvimento 🚧
+
+## 📄 Licença
+
+Este projeto é de uso educacional.
