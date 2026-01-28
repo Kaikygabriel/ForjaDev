@@ -11,15 +11,17 @@ public class Member : Entity
     {
         
     }
-    private Member(User user, string name)
+    private Member(User user, string name, string slug)
     {
         User = user;
         Name = name;
+        Slug = slug;
         Id = Guid.NewGuid();
     }
 
     public User User { get; init; }
     public List<Post> Posts { get; private set; } = new();
+    public string Slug { get;private set; }
     public string Name { get;private set; }
     public List<Comment> Comments { get;private set; } = new();
     public Role Role { get;private set; }
@@ -45,9 +47,9 @@ public class Member : Entity
 
     public static class Factory
     {
-        public static Result<Member> Create(User user, string name)
+        public static Result<Member> Create(User user, string name, string slug)
         {
-            return Result<Member>.Success(new(user, name));
+            return Result<Member>.Success(new(user, name,slug));
         }
     } 
 }

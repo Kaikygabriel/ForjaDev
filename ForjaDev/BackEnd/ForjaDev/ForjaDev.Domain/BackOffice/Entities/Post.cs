@@ -10,11 +10,10 @@ public class Post : Entity
     private Post()
     {
     }
-    private Post(string title, string body, string slug, Guid memberId, Guid categoryId)
+    private Post(string title, string body, Guid memberId, Guid categoryId = default)
     {
         Title = title;
         Body = body;
-        Slug = slug;
         MemberId = memberId;
         CategoryId = categoryId;
         CreateAt = DateTime.UtcNow;
@@ -22,11 +21,10 @@ public class Post : Entity
 
     public string Title { get;private set; }
     public string Body { get;private set; }
-    public string Slug { get;private set; }
     public DateTime CreateAt { get; init; }
     
-    public Guid CategoryId { get;private set; }
-    public Category Category { get;private set; }
+    public Guid? CategoryId { get;private set; }
+    public Category? Category { get;private set; }
     
     public Guid MemberId { get; init; }
     public Member Member { get; init; }
@@ -62,9 +60,9 @@ public class Post : Entity
     
     public static class Factory
     {
-        public static Result<Post> Create(string title, string body, string slug, Guid memberId, Guid categoryId)
+        public static Result<Post> Create(string title, string body, Guid memberId, Guid categoryId= default)
         {
-            return Result<Post>.Success(new(title, body, slug, memberId,categoryId));
+            return Result<Post>.Success(new(title, body, memberId,categoryId));
         }
     }
 }
