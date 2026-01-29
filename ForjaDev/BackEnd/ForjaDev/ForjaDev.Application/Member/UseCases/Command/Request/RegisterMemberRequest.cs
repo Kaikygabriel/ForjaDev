@@ -5,7 +5,7 @@ using MediatR;
 
 namespace ForjaDev.Application.Member.UseCases.Command.Request;
 
-public record RegisterMemberRequest(string Email, string Password, string Name) : IRequest<Result<AuthMemberResponse>>
+public record RegisterMemberRequest(string Email, string Password, string Name,string Slug) : IRequest<Result<AuthMemberResponse>>
 {
     public Result<Domain.BackOffice.Entities.Member> ToEntity()
     {
@@ -18,6 +18,6 @@ public record RegisterMemberRequest(string Email, string Password, string Name) 
         
         var user = User.Factory.Create(email.Value, password.Value).Value;
 
-        return Domain.BackOffice.Entities.Member.Factory.Create(user,Name);
+        return Domain.BackOffice.Entities.Member.Factory.Create(user,Name,Slug);
     }
 };

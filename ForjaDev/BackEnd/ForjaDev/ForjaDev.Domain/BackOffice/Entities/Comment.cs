@@ -26,6 +26,17 @@ public class Comment : Entity
     public string Message { get;private set; }
     public DateTime CreateAt { get; init; }
 
+
+    public List<Comment> SubComments { get; private set; } = new();
+    
+    public Guid? ParentCommentId { get;private set; }
+    public Comment? ParentComment { get;private set; }
+
+    public void AddComment(Comment comment)
+        => SubComments.Add(comment);
+
+    public void AddParentComment(Guid parentCommentId)
+        => ParentCommentId = parentCommentId;
     
     public static class Factory 
     {
