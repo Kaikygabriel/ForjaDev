@@ -5,7 +5,7 @@ using MediatR;
 
 namespace ForjaDev.Application.Post.UseCases.Command.Handler;
 
-internal class CreatePostHandler : IRequestHandler<CreatePostRequest,Result>
+internal  sealed class CreatePostHandler : IRequestHandler<CreatePostRequest,Result>
 {
     private readonly IUnitOfWork _unitOfWork;
 

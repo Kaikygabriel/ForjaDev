@@ -7,18 +7,21 @@ namespace ForjaDev.Domain.BackOffice.Entities;
 
 public class Post : Entity
 {
-    private Post()
+    private Post(string tag)
     {
+        Tag = tag;
     }
-    private Post(string title, string body, Guid memberId, Guid categoryId = default)
+    private Post(string title, string body, Guid memberId, string tag, Guid categoryId = default)
     {
         Title = title;
         Body = body;
         MemberId = memberId;
+        Tag = tag;
         CategoryId = categoryId;
         CreateAt = DateTime.UtcNow;
     }
 
+    public string Tag { get;private set; }
     public string Title { get;private set; }
     public string Body { get;private set; }
     public DateTime CreateAt { get; init; }
@@ -60,9 +63,9 @@ public class Post : Entity
     
     public static class Factory
     {
-        public static Result<Post> Create(string title, string body, Guid memberId, Guid categoryId= default)
+        public static Result<Post> Create(string title, string body, Guid memberId,string tag, Guid categoryId= default)
         {
-            return Result<Post>.Success(new(title, body, memberId,categoryId));
+            return Result<Post>.Success(new(title, body, memberId,tag,categoryId));
         }
     }
 }

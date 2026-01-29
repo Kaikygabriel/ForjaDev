@@ -9,6 +9,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Category\UseCases\" />
+    <Folder Include="Comment\UseCases\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

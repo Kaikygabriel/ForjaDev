@@ -8,7 +8,7 @@ using MediatR;
 
 namespace ForjaDev.Application.Member.UseCases.Command.Handler;
 
-internal class LoginMemberHandler : IRequestHandler<LoginMemberRequest,Result<AuthMemberResponse>>
+internal sealed class LoginMemberHandler : IRequestHandler<LoginMemberRequest,Result<AuthMemberResponse>>
 {
     private readonly IServiceUser _serviceUser;
     private readonly IUnitOfWork _unitOfWork;

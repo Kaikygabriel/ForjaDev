@@ -1,12 +1,12 @@
-using System.Xml.Serialization;
-using ForjaDev.Application.Post.UseCases.Command.Request;
+using ForjaDev.Application.Comment.Command.Request;
+using ForjaDev.Application.Comment.UseCases.Command.Request;
 using ForjaDev.Domain.BackOffice.Commum.Abstract;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
 using MediatR;
 
-namespace ForjaDev.Application.Post.UseCases.Command.Handler;
+namespace ForjaDev.Application.Comment.Command.Handler;
 
-public class CreateCommentHandler : IRequestHandler<CreateCommentRequest,Result>
+internal sealed class CreateCommentHandler : IRequestHandler<CreateCommentRequest,Result>
 {
     private readonly IUnitOfWork _unitOfWork;
 

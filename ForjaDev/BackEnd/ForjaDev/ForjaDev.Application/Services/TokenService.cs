@@ -18,7 +18,7 @@ internal class TokenService : ITokenService
 
     public string GenerateAccessToken(IEnumerable<Claim> claims)
     {
-        var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"!]);
+        var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!);
         var credentials = new SigningCredentials
             (new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
         var tokenDescriptor = new SecurityTokenDescriptor()

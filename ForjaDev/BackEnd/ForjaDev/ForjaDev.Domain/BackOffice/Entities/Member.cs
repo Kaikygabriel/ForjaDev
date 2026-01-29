@@ -17,7 +17,9 @@ public class Member : Entity
         Name = name;
         Slug = slug;
         Id = Guid.NewGuid();
+        CreateAt = DateTime.UtcNow;
     }
+    public DateTime CreateAt { get; init; }
 
     public User User { get; init; }
     public List<Post> Posts { get; private set; } = new();
