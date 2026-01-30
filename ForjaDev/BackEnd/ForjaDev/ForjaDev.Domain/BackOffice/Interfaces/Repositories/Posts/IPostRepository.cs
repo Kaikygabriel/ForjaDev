@@ -9,5 +9,5 @@ public interface IPostRepository : IRepositoryBase<Post>
     Task<Post> GetByIdWithMemberAsync(Guid id);
 
     Task<IEnumerable<Post>> GetAllByTitleCategoryAsync(string categoryTitle, int skip, int take);
-    Task<IEnumerable<Post>> GetAllAsync(int skip, int take);
+    Task<IEnumerable<Post>> GetAllByLikesAsync(int skip, int take);
 }

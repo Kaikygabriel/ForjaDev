@@ -20,7 +20,7 @@ public class Member : Entity
         CreateAt = DateTime.UtcNow;
     }
     public DateTime CreateAt { get; init; }
-
+    public Guid UserId { get;init; }
     public User User { get; init; }
     public List<Post> Posts { get; private set; } = new();
     public string Slug { get;private set; }

@@ -32,6 +32,7 @@ public class Post : Entity
     public Guid MemberId { get; init; }
     public Member Member { get; init; }
 
+    public int LikeCount { get;private set; }
     public List<Like>Likes { get;private set; }= new();
     public List<Comment> Comments { get; private set; } = new();
     
@@ -39,14 +40,18 @@ public class Post : Entity
     {
         if (Likes.Exists(x => x.MemberId == like.MemberId))
             return new Error("Like.Already", "Like already this in post");
+
         Likes.Add(like);
+        LikeCount++;
         return Result.Success();
     }
-    public Result RemoveLike(Like like)
+    public Result RemoveLike(Guid memberid)
     {
-        if (!Likes.Contains(like))
+        var like = Likes.FirstOrDefault(x => x.MemberId == memberid);
+        if (like is null )
             return new Error("Like.NotFound", "Like not found!");
         Likes.Remove(like);
+        LikeCount--;
         return Result.Success();
     }
 
