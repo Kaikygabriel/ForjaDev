@@ -1,10 +1,9 @@
-using ForjaDev.Application.Comment.Command.Request;
 using ForjaDev.Application.Comment.UseCases.Command.Request;
 using ForjaDev.Domain.BackOffice.Commum.Abstract;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
 using MediatR;
 
-namespace ForjaDev.Application.Comment.Command.Handler;
+namespace ForjaDev.Application.Comment.UseCases.Command.Handler;
 
 internal sealed class CreateCommentHandler : IRequestHandler<CreateCommentRequest,Result>
 {

@@ -3,7 +3,7 @@ using ForjaDev.Domain.BackOffice.Commum.Abstract;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
 using MediatR;
 
-namespace ForjaDev.Application.Comment.Command.Handler;
+namespace ForjaDev.Application.Comment.UseCases.Command.Handler;
 
 internal sealed class RemoveCommentHandler : IRequestHandler<RemoveCommentRequest,Result>
 {
