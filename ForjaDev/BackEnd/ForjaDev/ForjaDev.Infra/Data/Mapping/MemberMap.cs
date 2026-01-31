@@ -1,0 +1,49 @@
+using ForjaDev.Domain.BackOffice.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace ForjaDev.Infra.Data.Mapping;
+
+internal sealed class MemberMap : IEntityTypeConfiguration<Member>
+{
+    public void Configure(EntityTypeBuilder<Member> builder)
+    {
+        builder.ToTable("member");
+
+        builder.HasKey(x => x.Id)
+            .HasName("pk_member");
+
+        builder.Property(x => x.CreateAt)
+            .HasColumnName("created_at_utc")
+            .HasColumnType("TIMESTAMPTZ")
+            .IsRequired(true);
+
+        builder.Property(x => x.Name)
+            .HasColumnName("name")
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(200)
+            .IsRequired(true);
+        
+        builder.Property(x => x.Slug)
+            .HasColumnName("slug")
+            .HasColumnType("VARCHAR")
+            .HasMaxLength(200)
+            .IsRequired(true);
+
+        builder.HasOne(x => x.User)
+            .WithOne()
+            .HasForeignKey<Member>(x => x.UserId)
+            .OnDelete(DeleteBehavior.Cascade)
+            .IsRequired(true);
+
+        builder.OwnsOne(x => x.Role, x =>
+        {
+            x.Property(x => x.Title)
+                .HasColumnName("role_title")
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(150)
+                .IsRequired(false);
+        });
+        
+    }
+}
