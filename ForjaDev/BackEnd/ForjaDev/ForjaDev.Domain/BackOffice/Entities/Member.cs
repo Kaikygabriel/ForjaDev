@@ -27,6 +27,8 @@ public class Member : Entity
     public string Name { get;private set; }
     public List<Comment> Comments { get;private set; } = new();
     public Role Role { get;private set; }
+    public List<Following> Followings { get; private set; } = new();
+    
     public void AddPost(Post post)
         => Posts.Add(post);
     public void AddComment(Comment comment)
@@ -46,7 +48,28 @@ public class Member : Entity
         Comments.Remove(comment);
         return Result.Success();
     }
-
+    
+    public Result AddFollowing(Following following)
+    {
+        if (following.MemberToFollow.Id == this.Id)
+            return new Error("Following.SelfFollow", "You cannot follow yourself!");
+        
+        if (Followings.Contains(following))
+            return new Error("Follower.Already","you already Follower this user ! ");
+        
+        Followings.Add(following);
+        return Result.Success();
+    }
+    
+    public Result RemoveFollowing(Following following)
+    {
+        if (!Followings.Contains(following))
+            return new Error("Following.NoExists","Not Found!");
+        
+        Followings.Remove(following);
+        return Result.Success();
+    }
+    
     public static class Factory
     {
         public static Result<Member> Create(User user, string name, string slug)
