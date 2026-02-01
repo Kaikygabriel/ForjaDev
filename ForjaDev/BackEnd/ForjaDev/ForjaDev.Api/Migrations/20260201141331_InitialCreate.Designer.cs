@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ForjaDev.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260131131653_InitialCreate")]
+    [Migration("20260201141331_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -106,6 +106,11 @@ namespace ForjaDev.Api.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Bio")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("bio");
 
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("TIMESTAMPTZ")

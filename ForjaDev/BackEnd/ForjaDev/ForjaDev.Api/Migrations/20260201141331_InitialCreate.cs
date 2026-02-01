@@ -45,7 +45,8 @@ namespace ForjaDev.Api.Migrations
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     slug = table.Column<string>(type: "VARCHAR", maxLength: 200, nullable: false),
                     name = table.Column<string>(type: "VARCHAR", maxLength: 200, nullable: false),
-                    role_title = table.Column<string>(type: "VARCHAR", maxLength: 150, nullable: true)
+                    role_title = table.Column<string>(type: "VARCHAR", maxLength: 150, nullable: true),
+                    bio = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {

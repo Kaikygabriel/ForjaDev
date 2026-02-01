@@ -104,6 +104,11 @@ namespace ForjaDev.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Bio")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("bio");
+
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("TIMESTAMPTZ")
                         .HasColumnName("created_at_utc");
