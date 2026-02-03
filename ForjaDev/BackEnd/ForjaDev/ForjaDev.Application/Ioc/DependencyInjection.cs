@@ -1,5 +1,6 @@
 using System.Text;
-using ForjaDev.Application.Category.Command.Command;
+using ForjaDev.Application.Category.UseCases.Command.Command;
+using ForjaDev.Application.Member.UseCases.Command.Handler;
 using ForjaDev.Application.Services;
 using ForjaDev.Domain.BackOffice.Interfaces.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,7 +15,7 @@ public static class DependencyInjection
     public static IServiceCollection AddApplication(this IServiceCollection services,IConfiguration configuration)
     {
         services.AddMediatR
-            (x => x.RegisterServicesFromAssembly(typeof(CreateCategoryHandler).Assembly));
+            (x => x.RegisterServicesFromAssembly(typeof(RegisterMemberHandler).Assembly));
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IServiceUser,ServiceUser>();
         

@@ -11,8 +11,9 @@ public class Member : Entity
     {
         
     }
-    private Member(User user, string name, string slug)
+    private Member(User user, string name, string slug,string bio)
     {
+        Bio = bio;
         User = user;
         Name = name;
         Slug = slug;
@@ -28,6 +29,7 @@ public class Member : Entity
     public List<Comment> Comments { get;private set; } = new();
     public Role Role { get;private set; }
     public List<Following> Followings { get; private set; } = new();
+    public string Bio { get;private set; }
     
     public void AddPost(Post post)
         => Posts.Add(post);
@@ -72,9 +74,9 @@ public class Member : Entity
     
     public static class Factory
     {
-        public static Result<Member> Create(User user, string name, string slug)
+        public static Result<Member> Create(User user, string name, string slug,string bio)
         {
-            return Result<Member>.Success(new(user, name,slug));
+            return Result<Member>.Success(new(user, name,slug,bio));
         }
     } 
 }

@@ -1,5 +1,4 @@
 using ForjaDev.Application.Following.UseCases.Command.Request;
-using ForjaDev.Application.Following.UseCases.Query.Request;
 using ForjaDev.Application.Member.UseCases.Command.Request;
 using ForjaDev.Application.Member.UseCases.Query.Request;
 using MediatR;
@@ -9,11 +8,11 @@ namespace ForjaDev.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class MembersControllers : ControllerBase
+public class MembersController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public MembersControllers(IMediator mediator)
+    public MembersController(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -59,5 +58,15 @@ public class MembersControllers : ControllerBase
             return response.IsSuccess ? Ok(response.Value) : BadRequest(response.Error);
         }
     #endregion
-   
+
+    #region Delete
+
+        [HttpDelete("UnFollow")]
+        public async Task<ActionResult> UnFollow([FromQuery]RemoveFollowingRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return response.IsSuccess ? Ok() : BadRequest(response.Error);
+        }
+
+    #endregion
 }

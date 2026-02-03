@@ -18,17 +18,20 @@ internal sealed class CreateFollowoingHandler : IRequestHandler<CreateFollowingR
     public async Task<Result> Handle(CreateFollowingRequest request, CancellationToken cancellationToken)
     {
         var memberToFollow = await _unitOfWork.MemberRepository.GetByPredicateAsync(x => x.Id == request.MemberToFollow);
-        if (memberToFollow is null)
+        if (memberToFollow is null )
             return new Error("MemberToFollow.NotFound", "Not Found ! ");
         
         var memberFollowing = await _unitOfWork.MemberRepository.GetByEmail(request.EmailMemberFollowing);
-        if (memberFollowing is null)
+        if (memberFollowing is null || memberToFollow.Id == memberFollowing.Id)
             return new Error("memberFollowing.NotFound", "Not Found ! ");
 
+        if (await _unitOfWork.FollowingRepository.GetByPredicateAsync(x =>
+                x.MemberToFollowId == memberToFollow.Id &&
+                x.FollowingMemberId == memberFollowing.Id) is not null)
+            return new Error("Following.Exists", "Following Already exists");
+        
         var following = CreateFollowing(memberToFollow, memberFollowing).Value;
 
-        memberFollowing.AddFollowing(following);
-        _unitOfWork.MemberRepository.Update(memberToFollow);
         _unitOfWork.FollowingRepository.Create(following);
         
         await _unitOfWork.CommitAsync();

@@ -16,7 +16,7 @@ internal sealed class RemovePostHandler :  IRequestHandler<RemovePostRequest,Res
 
     public async Task<Result> Handle(RemovePostRequest request, CancellationToken cancellationToken)
     {
-        var post = await _unitOfWork.PostRepository.GetByIdWithMemberAsync(request.MemberId);
+        var post = await _unitOfWork.PostRepository.GetByIdWithMemberAsync(request.PostId);
         if (post is null || post.MemberId != request.MemberId)
             return new Error("Post.NotFound", "not found");
         

@@ -15,6 +15,7 @@ public class CommentRepository : RepositoryBase<Comment>,ICommentRepository
     {
         return await _context.Comments.AsNoTrackingWithIdentityResolution()
             .Include(x => x.SubComments)
+            .Include(x=>x.Member)
             .Where(x => x.PostId == postId)
             .ToListAsync();
     }

@@ -11,7 +11,10 @@ public class Following : Entity
     }
     private Following(Member memberToFollow, Member followingMember)
     {
+        MemberToFollowId = memberToFollow.Id;
         MemberToFollow = memberToFollow;
+
+        FollowingMemberId = followingMember.Id;
         FollowingMember = followingMember;
     }
 

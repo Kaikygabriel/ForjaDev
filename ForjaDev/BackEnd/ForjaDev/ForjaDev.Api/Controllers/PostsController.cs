@@ -15,14 +15,20 @@ public class PostsController : ControllerBase
     {
         _mediator = mediator;
     }
-    #region post
-        [HttpPost("Create")]
-        public async Task<ActionResult> Create([FromBody] CreatePostRequest request)
-        {
-            var response = await _mediator.Send(request);
-            return response.IsSuccess ? Created() : BadRequest(response.Error);
-        }
-    #endregion
+    
+    [HttpPost]
+    public async Task<ActionResult> Create([FromBody] CreatePostRequest request) 
+    {
+        var response = await _mediator.Send(request);
+        return response.IsSuccess ? Created() : BadRequest(response.Error);
+    }
+    
+    [HttpDelete]
+    public async Task<ActionResult> Delete([FromQuery] RemovePostRequest request) 
+    {
+        var response = await _mediator.Send(request);
+        return response.IsSuccess ? Ok() : BadRequest(response.Error);
+    }
     
     #region get
 
