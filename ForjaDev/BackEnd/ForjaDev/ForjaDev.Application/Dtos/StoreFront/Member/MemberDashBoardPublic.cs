@@ -5,6 +5,8 @@ public record MemberDashBoardPublic
     DateTime CreateAt,
     IEnumerable<Domain.BackOffice.Entities.Post>Posts,
     string Name,
+    string Email,
+    string Bio,
     int FollowingsCount,
     int FollowingCount
 );

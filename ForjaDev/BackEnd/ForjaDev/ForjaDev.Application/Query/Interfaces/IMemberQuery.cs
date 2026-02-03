@@ -4,5 +4,7 @@ namespace ForjaDev.Application.Query.Interfaces;
 
 public interface IMemberQuery
 {
-    Task<MemberDashBoardPublic?> GetDashBoardPublicBySlug(string slugMember);
+    Task<MemberDashBoardPublic?> GetDashBoardPublicBySlug(string memberSlug);
+    Task<MemberDashBoardPrivate?> GetDashBoardPrivateById(Guid memberId);
+
 }

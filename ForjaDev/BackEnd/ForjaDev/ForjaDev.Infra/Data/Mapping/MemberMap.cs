@@ -24,6 +24,11 @@ internal sealed class MemberMap : IEntityTypeConfiguration<Member>
             .HasMaxLength(200)
             .IsRequired(true);
         
+        builder.Property(x => x.Bio)
+            .HasColumnName("bio")
+            .HasColumnType("TEXT")
+            .IsRequired(true);
+        
         builder.Property(x => x.Slug)
             .HasColumnName("slug")
             .HasColumnType("VARCHAR")

@@ -3,7 +3,7 @@ using ForjaDev.Domain.BackOffice.Commum.Abstract;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
 using MediatR;
 
-namespace ForjaDev.Application.Category.Command.Command;
+namespace ForjaDev.Application.Category.UseCases.Command.Command;
 
 internal sealed class RemoveCategoryHandler : IRequestHandler<RemoveCategoryRequest,Result>
 {
