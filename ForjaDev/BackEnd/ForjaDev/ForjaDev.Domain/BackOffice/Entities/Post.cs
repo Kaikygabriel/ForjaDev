@@ -42,17 +42,17 @@ public class Post : Entity
             return new Error("Like.Already", "Like already this in post");
 
         Likes.Add(like);
-        LikeCount++;
+        LikeCount+=1;
         return Result.Success();
     }
-    public Result RemoveLike(Guid memberid)
+    public Result<Like> RemoveLike(Guid memberid)
     {
         var like = Likes.FirstOrDefault(x => x.MemberId == memberid);
         if (like is null )
             return new Error("Like.NotFound", "Like not found!");
         Likes.Remove(like);
         LikeCount--;
-        return Result.Success();
+        return Result<Like>.Success(like);
     }
 
     public void AddComment(Comment comment)

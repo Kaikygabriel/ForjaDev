@@ -23,8 +23,25 @@ public class PostsController : ControllerBase
         return response.IsSuccess ? Created() : BadRequest(response.Error);
     }
     
+     
+    [HttpPost("AddedLike")]
+    public async Task<ActionResult> AddedLike([FromBody] AddedLikeRequest request) 
+    {
+        var response = await _mediator.Send(request);
+        return response.IsSuccess ? Ok() : BadRequest(response.Error);
+    }
+    
+    
     [HttpDelete]
     public async Task<ActionResult> Delete([FromQuery] RemovePostRequest request) 
+    {
+        var response = await _mediator.Send(request);
+        return response.IsSuccess ? Ok() : BadRequest(response.Error);
+    }
+    
+    
+    [HttpDelete("RemoveLike")]
+    public async Task<ActionResult> RemoveLike([FromQuery] RemoveLikeRequest request) 
     {
         var response = await _mediator.Send(request);
         return response.IsSuccess ? Ok() : BadRequest(response.Error);
@@ -53,6 +70,11 @@ public class PostsController : ControllerBase
             var response = await _mediator.Send(request);
             return response.IsSuccess ? Ok(response.Value) : BadRequest(response.Error);
         }
-
+        [HttpGet("GetPostByTitle")]
+        public async Task<ActionResult> GetPostByTitle([FromQuery] GetPostByTitleRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return response.IsSuccess ? Ok(response.Value) : BadRequest(response.Error);
+        }
     #endregion
 }
