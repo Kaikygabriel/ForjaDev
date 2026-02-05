@@ -113,6 +113,10 @@ namespace ForjaDev.Api.Migrations
                         .HasColumnType("TIMESTAMPTZ")
                         .HasColumnName("created_at_utc");
 
+                    b.Property<string>("Links")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)

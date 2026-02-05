@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ForjaDev.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260204122949_v2")]
-    partial class v2
+    [Migration("20260205134724_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -115,6 +115,10 @@ namespace ForjaDev.Api.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("TIMESTAMPTZ")
                         .HasColumnName("created_at_utc");
+
+                    b.Property<string>("Links")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
 
                     b.Property<string>("Name")
                         .IsRequired()

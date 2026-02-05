@@ -39,6 +39,13 @@ public class MembersController : ControllerBase
             var response = await _mediator.Send(request);
             return response.IsSuccess ? Ok() : BadRequest(response.Error);
         }
+        
+        [HttpPost("AddLink")]
+        public async Task<ActionResult> AddLink([FromBody]AddLinkInMemberRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return response.IsSuccess ? Ok() : BadRequest(response.Error);
+        }
     #endregion
 
 
@@ -67,6 +74,11 @@ public class MembersController : ControllerBase
             var response = await _mediator.Send(request);
             return response.IsSuccess ? Ok() : BadRequest(response.Error);
         }
-
+        [HttpDelete("RemoveLink")]
+        public async Task<ActionResult> RemoveLink([FromQuery]RemoveLinkInMemberRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return response.IsSuccess ? Ok() : BadRequest(response.Error);
+        }
     #endregion
 }

@@ -45,8 +45,9 @@ namespace ForjaDev.Api.Migrations
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     slug = table.Column<string>(type: "VARCHAR", maxLength: 200, nullable: false),
                     name = table.Column<string>(type: "VARCHAR", maxLength: 200, nullable: false),
+                    bio = table.Column<string>(type: "TEXT", nullable: false),
                     role_title = table.Column<string>(type: "VARCHAR", maxLength: 150, nullable: true),
-                    bio = table.Column<string>(type: "TEXT", nullable: false)
+                    Links = table.Column<string>(type: "jsonb", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -147,29 +148,26 @@ namespace ForjaDev.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "likes",
+                name: "Like",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     PostId = table.Column<Guid>(type: "uuid", nullable: false),
-                    member_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    post_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    MemberId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_likes", x => x.id);
+                    table.PrimaryKey("pk_like", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_likes_member_member_id",
-                        column: x => x.member_id,
+                        name: "fk_like_member",
+                        column: x => x.MemberId,
                         principalTable: "member",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_likes_post_PostId",
+                        name: "fk_like_post",
                         column: x => x.PostId,
                         principalTable: "post",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -199,13 +197,13 @@ namespace ForjaDev.Api.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_likes_member_id",
-                table: "likes",
-                column: "member_id");
+                name: "IX_Like_MemberId",
+                table: "Like",
+                column: "MemberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_likes_PostId",
-                table: "likes",
+                name: "IX_Like_PostId",
+                table: "Like",
                 column: "PostId");
 
             migrationBuilder.CreateIndex(
@@ -235,7 +233,7 @@ namespace ForjaDev.Api.Migrations
                 name: "following");
 
             migrationBuilder.DropTable(
-                name: "likes");
+                name: "Like");
 
             migrationBuilder.DropTable(
                 name: "post");
