@@ -19,6 +19,12 @@ public class PostRepository : RepositoryBase<Post>,IPostRepository
             .ToListAsync();
     }
 
+    public async Task<Post?> GetByIdWithLike(Guid Id)
+    {
+        return await _context.Posts.Include(x => x.Likes)
+            .FirstOrDefaultAsync(x => x.Id == Id);
+    }
+
     public async Task<Post?> GetByIdWithCommentAsync(Guid id)
     {
         return await _context.Posts.AsNoTrackingWithIdentityResolution()

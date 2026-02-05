@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ForjaDev.Infra.Query;
 
-internal class MemberQuery : IMemberQuery
+internal sealed class MemberQuery : IMemberQuery
 {
     private readonly AppDbContext _context;
 

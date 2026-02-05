@@ -17,8 +17,7 @@ public class Password
 
     private static string CreateHashPassword(string password)
         => BCrypt.Net.BCrypt.HashPassword(password);
-
-
+    
     public static class Factory
     {
         public static Result<Password> Create(string password)

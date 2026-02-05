@@ -3,4 +3,5 @@
   <Project Path="ForjaDev.Application/ForjaDev.Application.csproj" />
   <Project Path="ForjaDev.Domain/ForjaDev.Domain.csproj" />
   <Project Path="ForjaDev.Infra/ForjaDev.Infra.csproj" />
+  <Project Path="ForjaDev.Test/ForjaDev.Test.csproj" />
 </Solution>

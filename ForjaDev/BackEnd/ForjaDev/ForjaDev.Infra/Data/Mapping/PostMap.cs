@@ -63,20 +63,6 @@ internal sealed class PostMap : IEntityTypeConfiguration<Post>
             .HasForeignKey(x => x.MemberId)
             .HasConstraintName("fk_post_member")
             .OnDelete(DeleteBehavior.Cascade);
-
         
-        builder.OwnsMany(p => p.Likes, like =>
-        {
-            like.ToTable("likes");
-            
-            like.Property<Guid>("post_id");
-            
-            like.HasKey(l => l.Id);
-            like.Property(l => l.Id).HasColumnName("id");
-            
-            like.Property(l => l.MemberId)
-                .HasColumnName("member_id")
-                .IsRequired();
-        });
     }
 }

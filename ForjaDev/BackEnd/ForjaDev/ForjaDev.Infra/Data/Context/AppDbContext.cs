@@ -1,10 +1,12 @@
 using ForjaDev.Domain.BackOffice.Entities;
+using ForjaDev.Domain.BackOffice.ValuesObject;
 using Microsoft.EntityFrameworkCore;
 
 namespace ForjaDev.Infra.Data.Context;
 
 public class AppDbContext(DbContextOptions<AppDbContext>options) : DbContext(options)
 {
+    public DbSet<Like>Likes{ get; set; }
     public DbSet<Post>Posts { get; set; }
     public DbSet<Category>Categories { get; set; }
     public DbSet<Member>Members { get; set; }

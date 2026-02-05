@@ -113,6 +113,10 @@ namespace ForjaDev.Api.Migrations
                         .HasColumnType("TIMESTAMPTZ")
                         .HasColumnName("created_at_utc");
 
+                    b.Property<string>("Links")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -195,6 +199,27 @@ namespace ForjaDev.Api.Migrations
                         .HasName("pk_user");
 
                     b.ToTable("user", (string)null);
+                });
+
+            modelBuilder.Entity("ForjaDev.Domain.BackOffice.ValuesObject.Like", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("MemberId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_like");
+
+                    b.HasIndex("MemberId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Like", (string)null);
                 });
 
             modelBuilder.Entity("ForjaDev.Domain.BackOffice.Entities.Comment", b =>
@@ -293,48 +318,7 @@ namespace ForjaDev.Api.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_post_member");
 
-                    b.OwnsMany("ForjaDev.Domain.BackOffice.ValuesObject.Like", "Likes", b1 =>
-                        {
-                            b1.Property<Guid>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("uuid")
-                                .HasColumnName("id");
-
-                            b1.Property<Guid>("MemberId")
-                                .HasColumnType("uuid")
-                                .HasColumnName("member_id");
-
-                            b1.Property<Guid>("PostId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<Guid>("post_id")
-                                .HasColumnType("uuid");
-
-                            b1.HasKey("Id");
-
-                            b1.HasIndex("MemberId");
-
-                            b1.HasIndex("PostId");
-
-                            b1.ToTable("likes", (string)null);
-
-                            b1.HasOne("ForjaDev.Domain.BackOffice.Entities.Member", "Member")
-                                .WithMany()
-                                .HasForeignKey("MemberId")
-                                .OnDelete(DeleteBehavior.Cascade)
-                                .IsRequired();
-
-                            b1.WithOwner("Post")
-                                .HasForeignKey("PostId");
-
-                            b1.Navigation("Member");
-
-                            b1.Navigation("Post");
-                        });
-
                     b.Navigation("Category");
-
-                    b.Navigation("Likes");
 
                     b.Navigation("Member");
                 });
@@ -386,6 +370,27 @@ namespace ForjaDev.Api.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ForjaDev.Domain.BackOffice.ValuesObject.Like", b =>
+                {
+                    b.HasOne("ForjaDev.Domain.BackOffice.Entities.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("fk_like_member");
+
+                    b.HasOne("ForjaDev.Domain.BackOffice.Entities.Post", "Post")
+                        .WithMany("Likes")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("fk_like_post");
+
+                    b.Navigation("Member");
+
+                    b.Navigation("Post");
+                });
+
             modelBuilder.Entity("ForjaDev.Domain.BackOffice.Entities.Category", b =>
                 {
                     b.Navigation("Posts");
@@ -408,6 +413,8 @@ namespace ForjaDev.Api.Migrations
             modelBuilder.Entity("ForjaDev.Domain.BackOffice.Entities.Post", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }
