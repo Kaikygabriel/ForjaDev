@@ -18,7 +18,20 @@ public class MembersController : ControllerBase
     }
 
     #region Post
-
+        [HttpPost("RestartPassword")]
+        public async Task<ActionResult> RestartPasswordByCode([FromBody]RestartPasswordByCodeRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return response.IsSuccess ? Ok() : BadRequest(response.Error);
+        }
+    
+        [HttpPost("SendEmailCode")]
+        public async Task<ActionResult> SendEmailCode([FromBody]SendEmailNotificationRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return response.IsSuccess ? Ok() : BadRequest(response.Error);
+        }
+    
         [HttpPost("Register")]
         public async Task<ActionResult> Register([FromBody]RegisterMemberRequest request)
         {
@@ -47,7 +60,6 @@ public class MembersController : ControllerBase
             return response.IsSuccess ? Ok() : BadRequest(response.Error);
         }
     #endregion
-
 
     #region Get
 
