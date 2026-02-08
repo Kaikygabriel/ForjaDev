@@ -1,4 +1,7 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using ForjaDev.Domain.BackOffice.Entities;
+using ForjaDev.Domain.BackOffice.ValuesObject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -49,6 +52,18 @@ internal sealed class MemberMap : IEntityTypeConfiguration<Member>
                 .HasMaxLength(150)
                 .IsRequired(false);
         });
-        
+        builder.Property(x => x.Links)
+            .HasColumnType("jsonb")
+            .HasColumnName("links")
+            .HasConversion(
+                x => 
+                    JsonSerializer.Serialize(x),
+                x=>
+                    string.IsNullOrWhiteSpace(x) ?
+                        new List<Link>(): 
+                        JsonSerializer.Deserialize<List<Link>>(x) ?? new()
+            )
+          ;
+
     }
 }

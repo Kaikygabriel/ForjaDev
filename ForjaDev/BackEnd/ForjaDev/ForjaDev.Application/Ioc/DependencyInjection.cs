@@ -35,7 +35,8 @@ public static class DependencyInjection
             };
         });
         services.AddAuthorization();
-
+        services.AddMemoryCache();
+        services.AddScoped<IServiceEmail, EmailService>();
         return services;
     }
 }

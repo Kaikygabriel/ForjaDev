@@ -1,5 +1,6 @@
 using ForjaDev.Application.Dtos.StoreFront.Member;
 using ForjaDev.Application.Query.Interfaces;
+using ForjaDev.Domain.BackOffice.Entities;
 using ForjaDev.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,19 @@ internal sealed class MemberQuery : IMemberQuery
     public MemberQuery(AppDbContext context)
     {
         _context = context;
+    }
+
+    public async Task<IEnumerable<Post>> GetPostsByFollows(Guid memberId)
+    {
+        var follows = await _context.Followings.Where(x => x.FollowingMemberId == memberId).ToListAsync();
+        
+        return await _context.Posts
+                .AsNoTrackingWithIdentityResolution()
+                .OrderByDescending(
+                    x => follows.Exists(x => x.Id == x.MemberToFollowId))
+                .OrderByDescending(x => x.CreateAt)
+                .ToListAsync();
+
     }
 
     public async Task<MemberDashBoardPublic?> GetDashBoardPublicBySlug(string memberSlug)
@@ -30,7 +44,8 @@ internal sealed class MemberQuery : IMemberQuery
                 m.User.Email.Address,
                 m.Bio,
                 countMemberToFollows, 
-                countMemberToFollowings          
+                countMemberToFollowings ,
+                m.Links
             ))
             .FirstOrDefaultAsync();
     }
@@ -52,7 +67,8 @@ internal sealed class MemberQuery : IMemberQuery
                 m.Bio,
                 m.Slug,
                 countMemberToFollows, 
-                countMemberToFollowings
+                countMemberToFollowings,
+                m.Links
                 ))
             .FirstOrDefaultAsync();
     }

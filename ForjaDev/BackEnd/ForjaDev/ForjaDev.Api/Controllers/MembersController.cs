@@ -76,6 +76,12 @@ public class MembersController : ControllerBase
             var response = await _mediator.Send(request);
             return response.IsSuccess ? Ok(response.Value) : BadRequest(response.Error);
         }
+        [HttpGet("GetPostsByFollows")]
+        public async Task<ActionResult> GetPostsByFollows([FromQuery] GetPostByFollowsRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return response.IsSuccess ? Ok(response.Value) : BadRequest(response.Error);
+        }
     #endregion
 
     #region Delete
