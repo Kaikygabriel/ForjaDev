@@ -7,6 +7,7 @@ public class EmailSendBuilder
         
     }
     
+    public string Name { get;private set; }
     public string ToAddress { get;private set; }
     public string Body { get;private set; }
     public string Title { get;private set; }
@@ -17,6 +18,11 @@ public class EmailSendBuilder
     public EmailSendBuilder To(string toAddress)
     {
         ToAddress = toAddress;
+        return this;
+    }
+    public EmailSendBuilder WithName(string name)
+    {
+        Name = name;
         return this;
     }
     

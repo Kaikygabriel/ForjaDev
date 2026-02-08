@@ -70,7 +70,22 @@ public class Post : Entity
     {
         public static Result<Post> Create(string title, string body, Guid memberId,string tag, Guid categoryId= default)
         {
+            if(!ParametersIsValid(title, body, memberId, tag))
+                return new Error("Parameters.Invalid","Parameters invalids !");
             return Result<Post>.Success(new(title, body, memberId,tag,categoryId));
         }
+    }
+
+    private static bool ParametersIsValid(string title, string body, Guid memberId, string tag)
+    {
+        if (string.IsNullOrEmpty(title) || title.Length <= 1)
+            return false;
+        if (string.IsNullOrEmpty(body) || body.Length <= 1)
+            return false;
+        if (string.IsNullOrEmpty(tag) || tag.Length <= 1)
+            return false;
+        if (string.IsNullOrWhiteSpace(memberId.ToString()))
+            return false;
+        return true;
     }
 }

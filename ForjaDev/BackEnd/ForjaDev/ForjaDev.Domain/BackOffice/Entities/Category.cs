@@ -1,4 +1,5 @@
 using ForjaDev.Domain.BackOffice.Commum;
+using ForjaDev.Domain.BackOffice.Commum.Abstract;
 using ForjaDev.Domain.BackOffice.Entities.Abstraction;
 
 namespace ForjaDev.Domain.BackOffice.Entities;
@@ -21,7 +22,12 @@ public class Category : Entity
     {
         public static Result<Category> Create(string title)
         {
+            if(TitleIsInvalid(title))
+                return new Error("Title.Invalid","Parameter Invalid !");
             return Result<Category>.Success(new(title));
         }
     }
+
+    private static bool TitleIsInvalid(string title)
+        => string.IsNullOrWhiteSpace(title);
 }

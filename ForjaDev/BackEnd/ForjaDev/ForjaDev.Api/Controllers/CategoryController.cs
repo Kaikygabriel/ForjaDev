@@ -19,6 +19,7 @@ public class CategoryController : ControllerBase
     [HttpPost]
     public async Task<ActionResult> Create(CreateCategoryRequest request)
     {
+        throw new Exception("teste");
         var response = await _mediator.Send(request);
         return response.IsSuccess ? Created() : BadRequest(response.Error);
     }

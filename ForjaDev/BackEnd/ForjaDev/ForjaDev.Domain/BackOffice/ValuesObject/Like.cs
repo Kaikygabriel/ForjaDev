@@ -29,6 +29,3 @@ public class Like : Entity
             => Result<Like>.Success(new Like(member,post));
     }
 }
-
-
-//OwnsMany

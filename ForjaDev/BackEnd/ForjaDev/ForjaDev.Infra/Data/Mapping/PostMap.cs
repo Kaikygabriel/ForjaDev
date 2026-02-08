@@ -63,6 +63,6 @@ internal sealed class PostMap : IEntityTypeConfiguration<Post>
             .HasForeignKey(x => x.MemberId)
             .HasConstraintName("fk_post_member")
             .OnDelete(DeleteBehavior.Cascade);
-        
+         
     }
 }

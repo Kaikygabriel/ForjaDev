@@ -20,22 +20,40 @@ public class Member : Entity
         Id = Guid.NewGuid();
         CreateAt = DateTime.UtcNow;
     }
+
+    #region Property
+    
     public DateTime CreateAt { get; init; }
     public Guid UserId { get;init; }
     public User User { get; init; }
-    public List<Post> Posts { get; private set; } = new();
     public string Slug { get;private set; }
     public string Name { get;private set; }
-    public List<Comment> Comments { get;private set; } = new();
+    public string Bio { get;private set; }
     public Role Role { get;private set; }
     public List<Following> Followings { get; private set; } = new();
-    public string Bio { get;private set; }
+    public List<Post> Posts { get; private set; } = new();
+    public List<Comment> Comments { get;private set; } = new();
+    public List<Link> Links { get;private set; } = new();
+
+    #endregion
     
+    #region methods
+    
+    public void AddLink(Link link)
+        => Links.Add(link);
     public void AddPost(Post post)
         => Posts.Add(post);
     public void AddComment(Comment comment)
         => Comments.Add(comment);
     
+    public Result RemoveLink(string placeKink)
+    {
+        var link = Links.FirstOrDefault(x => x.PlaceOfOrigin == placeKink);
+        if (link is null)
+            return new Error("Link.NotFound", "Link not found!");
+        Links.Remove(link);
+        return Result.Success();
+    }
     public Result RemovePost(Post post)
     {
         if (!Posts.Contains(post))
@@ -71,6 +89,7 @@ public class Member : Entity
         Followings.Remove(following);
         return Result.Success();
     }
+    #endregion
     
     public static class Factory
     {

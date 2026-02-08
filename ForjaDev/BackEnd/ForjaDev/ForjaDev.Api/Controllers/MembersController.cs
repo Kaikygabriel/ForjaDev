@@ -18,7 +18,20 @@ public class MembersController : ControllerBase
     }
 
     #region Post
-
+        [HttpPost("RestartPassword")]
+        public async Task<ActionResult> RestartPasswordByCode([FromBody]RestartPasswordByCodeRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return response.IsSuccess ? Ok() : BadRequest(response.Error);
+        }
+    
+        [HttpPost("SendEmailCode")]
+        public async Task<ActionResult> SendEmailCode([FromBody]SendEmailNotificationRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return response.IsSuccess ? Ok() : BadRequest(response.Error);
+        }
+    
         [HttpPost("Register")]
         public async Task<ActionResult> Register([FromBody]RegisterMemberRequest request)
         {
@@ -48,7 +61,6 @@ public class MembersController : ControllerBase
         }
     #endregion
 
-
     #region Get
 
         [HttpGet("DashBoardPublic")]
@@ -60,6 +72,12 @@ public class MembersController : ControllerBase
         
         [HttpGet("DashBoardPrivate")]
         public async Task<ActionResult> DashBoardPrivate([FromQuery] GetDashBoardPrivateRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return response.IsSuccess ? Ok(response.Value) : BadRequest(response.Error);
+        }
+        [HttpGet("GetPostsByFollows")]
+        public async Task<ActionResult> GetPostsByFollows([FromQuery] GetPostByFollowsRequest request)
         {
             var response = await _mediator.Send(request);
             return response.IsSuccess ? Ok(response.Value) : BadRequest(response.Error);

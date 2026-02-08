@@ -1,3 +1,5 @@
+using ForjaDev.Domain.BackOffice.ValuesObject;
+
 namespace ForjaDev.Application.Dtos.StoreFront.Member;
 
 public record MemberDashBoardPrivate(
@@ -9,4 +11,6 @@ public record MemberDashBoardPrivate(
     string Bio,
     string Slug,
     int FollowingsCount,
-    int FollowingCount);
+    int FollowingCount,
+    IEnumerable<Link>Links
+);
