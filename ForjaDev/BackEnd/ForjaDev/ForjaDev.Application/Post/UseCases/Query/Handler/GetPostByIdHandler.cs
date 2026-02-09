@@ -2,8 +2,9 @@ using ForjaDev.Application.Dtos.StoreFront.Comments;
 using ForjaDev.Application.Dtos.StoreFront.Posts;
 using ForjaDev.Application.Post.UseCases.Query.Request;
 using ForjaDev.Domain.BackOffice.Commum;
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
+using ForjaDev.Domain.BackOffice.Repositories;
+using ForjaDev.Domain.BackOffice.Specification.Post;
 using MediatR;
 
 namespace ForjaDev.Application.Post.UseCases.Query.Handler;
@@ -21,7 +22,7 @@ internal sealed class GetPostByIdHandler : IRequestHandler<GetPostByIdRequest,Re
     {
         var post = await _unitOfWork.PostRepository.GetByIdWithMemberAsync(request.PostId);
         if (post is null)
-            return new Error("Post.NotFound", "Not Found");
+            return Error.PostNotFound();
         var comments = await _unitOfWork.CommentRepository.GetAllByPostId(request.PostId);
         var commentsDto = CommentDto.ToCommentDtos(comments);
 

@@ -1,6 +1,5 @@
+using ForjaDev.Domain.BackOffice.Abstract;
 using ForjaDev.Domain.BackOffice.Commum;
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
-using ForjaDev.Domain.BackOffice.Entities.Abstraction;
 
 namespace ForjaDev.Domain.BackOffice.Entities;
 

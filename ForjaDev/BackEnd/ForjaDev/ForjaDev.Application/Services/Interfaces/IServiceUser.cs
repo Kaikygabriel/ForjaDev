@@ -1,7 +1,7 @@
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
+using ForjaDev.Domain.BackOffice.Abstract;
 using ForjaDev.Domain.BackOffice.Entities;
 
-namespace ForjaDev.Domain.BackOffice.Interfaces.Services;
+namespace ForjaDev.Application.Services.Interfaces;
 
 public interface IServiceUser
 {

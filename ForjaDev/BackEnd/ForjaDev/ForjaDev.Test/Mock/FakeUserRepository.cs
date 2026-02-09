@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using ForjaDev.Domain.BackOffice.Abstract;
 using ForjaDev.Domain.BackOffice.Entities;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Users;
 using ForjaDev.Domain.BackOffice.ValuesObject;
@@ -33,6 +34,12 @@ public class FakeUserRepository : IUserRepository
 
         _data.AddRange(new[] { user1, user2, user3 });
     }
+
+    public Task<User?> GetBySpecificationAsync(ISpecification<User> specification)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<User?> GetByPredicateAsync(Expression<Func<User, bool>> predicate)
     {
         return Task.FromResult(_data.AsQueryable().FirstOrDefault(predicate));

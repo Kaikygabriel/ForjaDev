@@ -5,6 +5,7 @@ using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Followings;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Members;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Posts;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Users;
+using ForjaDev.Domain.BackOffice.Repositories;
 
 namespace ForjaDev.Test.Mock;
 
@@ -12,7 +13,7 @@ public class FakeUnitOfWork : IUnitOfWork
 {
     public ICommentRepository CommentRepository { get; }
     public IMemberRepository MemberRepository { get;} = new FakeMemberRepository();
-    public IPostRepository PostRepository { get; }
+    public IPostRepository PostRepository { get; } = new FakePostRepository();
     public IUserRepository UserRepository { get; } = new FakeUserRepository();
     public ICategoryRepository CategoryRepository { get; }
     public IFollowingRepository FollowingRepository { get; }

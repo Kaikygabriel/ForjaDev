@@ -1,8 +1,10 @@
 using MediatR;
 using ForjaDev.Application.Post.UseCases.Command.Request;
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
+using ForjaDev.Domain.BackOffice.Abstract;
+using ForjaDev.Domain.BackOffice.Commum;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Likes;
+using ForjaDev.Domain.BackOffice.Repositories;
 using ForjaDev.Domain.BackOffice.ValuesObject;
 
 namespace ForjaDev.Application.Post.UseCases.Command.Handler;
@@ -22,7 +24,7 @@ internal sealed class RemoveLikeHandler : IRequestHandler<RemoveLikeRequest,Resu
     {
         var post = await _unitOfWork.PostRepository.GetByIdWithLike( request.PostId);
         if (post is null)
-            return new Error("Post.NotFound", "Not found");
+            return Error.PostNotFound();
         var resultRemoveLikeInPost = post.RemoveLike(request.MemberId);
         if (!resultRemoveLikeInPost.IsSuccess)
             return resultRemoveLikeInPost.Error;

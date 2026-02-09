@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using ForjaDev.Domain.BackOffice.Abstract;
 using ForjaDev.Domain.BackOffice.Entities;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Members;
 using ForjaDev.Domain.BackOffice.ValuesObject;
@@ -9,7 +10,7 @@ public class FakeMemberRepository : IMemberRepository
 {
     private readonly List<Member> _data = new();
 
-    public FakeMemberRepository()
+    public FakeMemberRepository()   
     {
         Seed();
     }
@@ -55,6 +56,11 @@ public class FakeMemberRepository : IMemberRepository
         ).Value;
 
         _data.AddRange(new[] { member1, member2, member3 });
+    }
+
+    public Task<Member?> GetBySpecificationAsync(ISpecification<Member> specification)
+    {
+        throw new NotImplementedException();
     }
 
     public Task<Member?> GetByPredicateAsync(Expression<Func<Member, bool>> predicate)

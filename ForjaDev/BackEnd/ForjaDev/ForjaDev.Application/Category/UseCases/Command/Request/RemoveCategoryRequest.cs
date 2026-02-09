@@ -1,4 +1,4 @@
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
+using ForjaDev.Domain.BackOffice.Abstract;
 using MediatR;
 
 namespace ForjaDev.Application.Category.Command.Request;

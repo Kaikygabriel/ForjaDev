@@ -2,7 +2,7 @@ using System.Text;
 using ForjaDev.Application.Category.UseCases.Command.Command;
 using ForjaDev.Application.Member.UseCases.Command.Handler;
 using ForjaDev.Application.Services;
-using ForjaDev.Domain.BackOffice.Interfaces.Services;
+using ForjaDev.Application.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,4 +1,4 @@
-namespace ForjaDev.Domain.BackOffice.Entities.Abstraction;
+namespace ForjaDev.Domain.BackOffice.Abstract;
 
 public abstract class Entity
 {

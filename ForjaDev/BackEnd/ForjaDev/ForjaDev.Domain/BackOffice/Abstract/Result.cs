@@ -1,4 +1,6 @@
-namespace ForjaDev.Domain.BackOffice.Commum.Abstract;
+using ForjaDev.Domain.BackOffice.Commum;
+
+namespace ForjaDev.Domain.BackOffice.Abstract;
 
 public class Result
 {

@@ -1,6 +1,8 @@
 using ForjaDev.Application.Comment.UseCases.Command.Request;
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
+using ForjaDev.Domain.BackOffice.Abstract;
+using ForjaDev.Domain.BackOffice.Commum;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
+using ForjaDev.Domain.BackOffice.Repositories;
 using MediatR;
 
 namespace ForjaDev.Application.Comment.UseCases.Command.Handler;
@@ -22,10 +24,10 @@ internal sealed class CreateCommentHandler : IRequestHandler<CreateCommentReques
         var comment = resultCreateComment.Value;
         var member = await _unitOfWork.MemberRepository.GetByPredicateAsync(x => x.Id == request.MemberId);
         if (member is null)
-            return new Error("Member.NotFound", "Not Found !");
+            return Error.MemberNotFound();
         var post = await _unitOfWork.PostRepository.GetByPredicateAsync(x => x.Id == request.PostId);
         if (post is null)
-            return new Error("post.NotFound", "Not Found !");
+            return Error.PostNotFound();
         
         post.AddComment(comment);
         member.AddComment(comment);

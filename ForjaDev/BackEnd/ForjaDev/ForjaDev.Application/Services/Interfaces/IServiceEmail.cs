@@ -1,6 +1,6 @@
 using ForjaDev.Domain.BackOffice.Commum;
 
-namespace ForjaDev.Domain.BackOffice.Interfaces.Services;
+namespace ForjaDev.Application.Services.Interfaces;
 
 public interface IServiceEmail
 {

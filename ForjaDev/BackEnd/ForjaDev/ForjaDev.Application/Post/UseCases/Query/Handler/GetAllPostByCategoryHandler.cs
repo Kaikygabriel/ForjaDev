@@ -2,6 +2,7 @@ using ForjaDev.Application.Dtos.StoreFront.Posts;
 using ForjaDev.Application.Post.UseCases.Query.Request;
 using ForjaDev.Domain.BackOffice.Commum;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
+using ForjaDev.Domain.BackOffice.Repositories;
 using MediatR;
 
 namespace ForjaDev.Application.Post.UseCases.Query.Handler;

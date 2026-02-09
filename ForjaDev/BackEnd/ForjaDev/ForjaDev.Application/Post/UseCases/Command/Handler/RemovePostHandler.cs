@@ -1,6 +1,8 @@
 using ForjaDev.Application.Post.UseCases.Command.Request;
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
+using ForjaDev.Domain.BackOffice.Abstract;
+using ForjaDev.Domain.BackOffice.Commum;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
+using ForjaDev.Domain.BackOffice.Repositories;
 using MediatR;
 
 namespace ForjaDev.Application.Post.UseCases.Command.Handler;
@@ -18,7 +20,7 @@ internal sealed class RemovePostHandler :  IRequestHandler<RemovePostRequest,Res
     {
         var post = await _unitOfWork.PostRepository.GetByIdWithMemberAsync(request.PostId);
         if (post is null || post.MemberId != request.MemberId)
-            return new Error("Post.NotFound", "not found");
+            return Error.PostNotFound();
         
         _unitOfWork.PostRepository.Delete(post);
         await _unitOfWork.CommitAsync();

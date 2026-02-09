@@ -5,7 +5,7 @@ using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Members;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Posts;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Users;
 
-namespace ForjaDev.Domain.BackOffice.Interfaces.Repositories;
+namespace ForjaDev.Domain.BackOffice.Repositories;
 
 public interface IUnitOfWork
 {
