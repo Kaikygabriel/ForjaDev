@@ -17,15 +17,13 @@ internal sealed class MemberQuery : IMemberQuery
 
     public async Task<IEnumerable<Post>> GetPostsByFollows(Guid memberId)
     {
-        var follows = await _context.Followings.Where(x => x.FollowingMemberId == memberId).ToListAsync();
-        
-        return await _context.Posts
-                .AsNoTrackingWithIdentityResolution()
-                .OrderByDescending(
-                    x => follows.Exists(x => x.Id == x.MemberToFollowId))
-                .OrderByDescending(x => x.CreateAt)
+        return await 
+            _context
+                .Followings
+                .Where(x => x.FollowingMemberId == memberId)
+                .Include(x=>x.MemberToFollow.Posts)
+                .SelectMany(x=>x.MemberToFollow.Posts)
                 .ToListAsync();
-
     }
 
     public async Task<MemberDashBoardPublic?> GetDashBoardPublicBySlug(string memberSlug)

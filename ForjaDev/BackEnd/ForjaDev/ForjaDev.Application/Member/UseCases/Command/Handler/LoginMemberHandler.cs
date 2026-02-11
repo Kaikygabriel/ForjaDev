@@ -1,9 +1,9 @@
 using ForjaDev.Application.Member.UseCases.Command.Request;
 using ForjaDev.Application.Member.UseCases.Command.Response;
+using ForjaDev.Application.Services.Interfaces;
 using ForjaDev.Domain.BackOffice.Commum;
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
-using ForjaDev.Domain.BackOffice.Interfaces.Services;
+using ForjaDev.Domain.BackOffice.Repositories;
 using MediatR;
 
 namespace ForjaDev.Application.Member.UseCases.Command.Handler;
@@ -25,10 +25,11 @@ internal sealed class LoginMemberHandler : IRequestHandler<LoginMemberRequest,Re
     {
         var member = await _unitOfWork.MemberRepository.GetByEmail(request.Email);
         if (member is null)
-            return new Error("Member.NotFound", "member not found");
+            return Error.MemberNotFound();
         var resultPasswordIsValid = _serviceUser.CheckPassword(request.Password, member.User);
         if (!resultPasswordIsValid.IsSuccess)
             return resultPasswordIsValid.Error;
+        
         var claims = _tokenService.GetClaimsByMember(member);
         var token = _tokenService.GenerateAccessToken(claims);
 

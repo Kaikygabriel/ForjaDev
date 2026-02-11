@@ -1,7 +1,8 @@
 
 using System.Linq.Expressions;
-using ForjaDev.Domain.BackOffice.Entities.Abstraction;
+using ForjaDev.Domain.BackOffice.Abstract;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
+using ForjaDev.Domain.BackOffice.Repositories;
 using ForjaDev.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,13 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : Entity
     public RepositoryBase(AppDbContext context)
     {
         _context = context;
+    }
+
+    public async Task<T?> GetBySpecificationAsync(ISpecification<T> specification)
+    {
+        return await _context.Set<T>()
+            .Where(x=>specification.IsSatisfiedBy(x))
+            .FirstOrDefaultAsync();
     }
 
     public async Task<T?> GetByPredicateAsync(Expression<Func<T, bool>> predicate)

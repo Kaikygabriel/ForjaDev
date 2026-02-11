@@ -1,7 +1,9 @@
 using ForjaDev.Application.Post.UseCases.Command.Request;
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
+using ForjaDev.Domain.BackOffice.Abstract;
+using ForjaDev.Domain.BackOffice.Commum;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Likes;
+using ForjaDev.Domain.BackOffice.Repositories;
 using ForjaDev.Domain.BackOffice.ValuesObject;
 using MediatR;
 
@@ -22,11 +24,11 @@ internal sealed class AddedLikeHandler : IRequestHandler<AddedLikeRequest,Result
     {
         var post = await _unitOfWork.PostRepository.GetByIdWithLike( request.PostId);
         if(post is null || post.MemberId == request.MemberId)
-            return new Error("post.NotFound","not found !") ;
+            return Error.PostNotFound();
         
         var member = await _unitOfWork.MemberRepository.GetByPredicateAsync(x => x.Id == request.MemberId);
         if(member is null)
-            return new Error("Member.NotFound","not found !") ;
+            return Error.MemberNotFound();
 
         var resultCreatedLike = Like.Factory.Create(member, post);
         if (!resultCreatedLike.IsSuccess)

@@ -1,5 +1,4 @@
 using ForjaDev.Domain.BackOffice.Commum;
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
 
 namespace ForjaDev.Domain.BackOffice.ValuesObject;
 

@@ -1,7 +1,7 @@
+using ForjaDev.Application.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using ForjaDev.Domain.BackOffice.Commum;
-using ForjaDev.Domain.BackOffice.Interfaces.Services;
 using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 namespace ForjaDev.Application.Services;

@@ -1,8 +1,9 @@
 using ForjaDev.Application.Member.UseCases.Command.Request;
 using ForjaDev.Application.Member.UseCases.Command.Response;
+using ForjaDev.Application.Services.Interfaces;
 using ForjaDev.Domain.BackOffice.Commum;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
-using ForjaDev.Domain.BackOffice.Interfaces.Services;
+using ForjaDev.Domain.BackOffice.Repositories;
 using MediatR;
 
 namespace ForjaDev.Application.Member.UseCases.Command.Handler;

@@ -5,6 +5,7 @@ using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Followings;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Members;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Posts;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Users;
+using ForjaDev.Domain.BackOffice.Repositories;
 using ForjaDev.Infra.Data.Context;
 using ForjaDev.Infra.Repositories.Categories;
 using ForjaDev.Infra.Repositories.Comments;

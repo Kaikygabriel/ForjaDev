@@ -1,6 +1,8 @@
 using ForjaDev.Application.Comment.UseCases.Command.Request;
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
+using ForjaDev.Domain.BackOffice.Abstract;
+using ForjaDev.Domain.BackOffice.Commum;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
+using ForjaDev.Domain.BackOffice.Repositories;
 using MediatR;
 
 namespace ForjaDev.Application.Comment.UseCases.Command.Handler;
@@ -23,7 +25,7 @@ internal sealed class CreateSubCommentHandler : IRequestHandler<CreateSubComment
         var subComment = resultCreateSubComment.Value; 
         var commentFather = await _unitOfWork.CommentRepository.GetByPredicateAsync(x => x.Id == request.CommentId);
         if (commentFather is null)
-            return new Error("Comment.NotFound", "Comment Not Found");
+            return Error.MemberNotFound();
         
         commentFather.AddComment(subComment);
         subComment.AddComment(commentFather);

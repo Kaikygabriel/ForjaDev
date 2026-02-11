@@ -1,8 +1,9 @@
 using ForjaDev.Application.Member.UseCases.Command.Request;
+using ForjaDev.Application.Services.Interfaces;
+using ForjaDev.Domain.BackOffice.Abstract;
 using ForjaDev.Domain.BackOffice.Commum;
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
-using ForjaDev.Domain.BackOffice.Interfaces.Services;
+using ForjaDev.Domain.BackOffice.Repositories;
 using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -25,7 +26,7 @@ internal sealed class SendEmailNotificationHandler : IRequestHandler<SendEmailNo
     {
         var member = await _unitOfWork.MemberRepository.GetByEmail(request.EmailOfMember);
         if (member is null)
-            return new Error("Member.NotFound", "Not Found");
+            return Error.MemberNotFound();
         
         var code = Guid.NewGuid().ToString("N")[0..5];
         _memoryCache.Set(code, member.User.Email.Address);

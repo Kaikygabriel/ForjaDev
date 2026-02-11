@@ -1,6 +1,8 @@
 using ForjaDev.Application.Following.UseCases.Command.Request;
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
+using ForjaDev.Domain.BackOffice.Abstract;
+using ForjaDev.Domain.BackOffice.Commum;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
+using ForjaDev.Domain.BackOffice.Repositories;
 using MediatR;
 
 namespace ForjaDev.Application.Following.UseCases.Command.Handler;

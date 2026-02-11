@@ -1,6 +1,8 @@
 using ForjaDev.Application.Member.UseCases.Command.Request;
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
+using ForjaDev.Domain.BackOffice.Abstract;
+using ForjaDev.Domain.BackOffice.Commum;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
+using ForjaDev.Domain.BackOffice.Repositories;
 using MediatR;
 using Microsoft.Extensions.Caching.Memory;
 
@@ -24,7 +26,7 @@ internal sealed class RestartPasswordByCodeHandler : IRequestHandler<RestartPass
 
         var member = await _unitOfWork.MemberRepository.GetByEmail(email);
         if (member is null)
-            return new Error("Member Not Found", "Not Found");
+            return Error.MemberNotFound();
 
         var resultUpdatePassword = member.User.Password.UpdatePassword(request.NewPassword);
         if (!resultUpdatePassword.IsSuccess)

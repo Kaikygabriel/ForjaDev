@@ -5,6 +5,7 @@ using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Likes;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Members;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Posts;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories.Users;
+using ForjaDev.Domain.BackOffice.Repositories;
 using ForjaDev.Infra.Query;
 using ForjaDev.Infra.Repositories;
 using ForjaDev.Infra.Repositories.Categories;

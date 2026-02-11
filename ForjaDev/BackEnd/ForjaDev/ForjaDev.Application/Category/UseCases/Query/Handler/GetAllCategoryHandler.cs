@@ -1,7 +1,7 @@
 using ForjaDev.Application.Category.UseCases.Query.Request;
 using ForjaDev.Domain.BackOffice.Commum;
-using ForjaDev.Domain.BackOffice.Commum.Abstract;
 using ForjaDev.Domain.BackOffice.Interfaces.Repositories;
+using ForjaDev.Domain.BackOffice.Repositories;
 using MediatR;
 
 namespace ForjaDev.Application.Category.UseCases.Query.Handler;
