@@ -29,9 +29,16 @@ public static class DependencyInjection
             x.SaveToken = true;
             x.TokenValidationParameters = new()
             {
-                IssuerSigningKey = new SymmetricSecurityKey
-                    (Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!)),
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(configuration["Jwt:Key"]!)
+                ),
+
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
                 ClockSkew = TimeSpan.Zero
+                
             };
         });
         services.AddAuthorization();

@@ -1,6 +1,8 @@
+using System.Security.Claims;
 using ForjaDev.Application.Post.UseCases.Command.Request;
 using ForjaDev.Application.Post.UseCases.Query.Request;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForjaDev.Api.Controllers;
@@ -16,36 +18,57 @@ public class PostsController : ControllerBase
         _mediator = mediator;
     }
     
+    [Authorize]
     [HttpPost]
     public async Task<ActionResult> Create([FromBody] CreatePostRequest request) 
     {
+        var claims = User;
+        if (VerifyAuthorization(request.MemberId, claims))
+            return Forbid();
+        
         var response = await _mediator.Send(request);
         return response.IsSuccess ? Created() : BadRequest(response.Error);
     }
     
-     
+    [Authorize]
     [HttpPost("AddedLike")]
     public async Task<ActionResult> AddedLike([FromBody] AddedLikeRequest request) 
     {
+        var claims = User;
+        if (VerifyAuthorization(request.MemberId, claims))
+            return Forbid();
+        
         var response = await _mediator.Send(request);
         return response.IsSuccess ? Ok() : BadRequest(response.Error);
     }
     
-    
+    [Authorize]
     [HttpDelete]
     public async Task<ActionResult> Delete([FromQuery] RemovePostRequest request) 
     {
+        var claims = User;
+        if (VerifyAuthorization(request.MemberId, claims))
+            return Forbid();
+        
         var response = await _mediator.Send(request);
         return response.IsSuccess ? Ok() : BadRequest(response.Error);
     }
     
-    
+    [Authorize]
     [HttpDelete("RemoveLike")]
     public async Task<ActionResult> RemoveLike([FromQuery] RemoveLikeRequest request) 
     {
+        var claims = User;
+        if (VerifyAuthorization(request.MemberId, claims))
+            return Forbid();
+        
         var response = await _mediator.Send(request);
         return response.IsSuccess ? Ok() : BadRequest(response.Error);
     }
+    
+    private bool VerifyAuthorization(Guid memberId, ClaimsPrincipal claims)
+        => !memberId.ToString().Equals(claims.Identity!.Name);
+
     
     #region get
 

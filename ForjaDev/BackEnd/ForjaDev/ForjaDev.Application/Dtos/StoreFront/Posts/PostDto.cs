@@ -16,5 +16,5 @@ public record PostDto
     public static IEnumerable<PostDto> ToPostDtos(IEnumerable<Domain.BackOffice.Entities.Post> posts)
         => posts.Select(x => (PostDto)x);
     public static explicit operator PostDto(Domain.BackOffice.Entities.Post post)
-        => new(post.Id,post.Title, post.Body, post.Tag, post.CreateAt, post.Likes.Count, post.Category);
+        => new(post.Id,post.Title, post.Body, post.Tag, post.CreateAt, post.LikeCount, post.Category);
 }

@@ -37,7 +37,7 @@ internal class TokenService : ITokenService
     {
         var claims = new List<Claim>()
         {
-            new Claim(ClaimTypes.Name, member.User.Email.Address),
+            new Claim(ClaimTypes.Name, member.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N"))
         };
         return claims;

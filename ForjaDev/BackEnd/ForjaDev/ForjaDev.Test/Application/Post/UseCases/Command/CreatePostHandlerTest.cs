@@ -1,8 +1,6 @@
 using ForjaDev.Application.Post.UseCases.Command.Handler;
 using ForjaDev.Application.Post.UseCases.Command.Request;
-using ForjaDev.Domain.BackOffice.Entities;
 using ForjaDev.Domain.BackOffice.Repositories;
-using ForjaDev.Domain.BackOffice.ValuesObject;
 using ForjaDev.Test.Mock;
 
 namespace ForjaDev.Test.Application.Post.UseCases.Command;
@@ -36,19 +34,9 @@ public class CreatePostHandlerTest
     
     [Fact]
     public async Task Should_Return_true_If_Created_Post()
-    { 
-        var user1 = User.Factory.Create(
-            Email.Factory.Create("teste@forjadev.com").Value,
-            Password.Factory.Create("testestes").Value
-        ).Value;
-        var member3 = ForjaDev.Domain.BackOffice.Entities.Member.Factory.Create(
-            user1,
-            "teste",
-            "teste",
-            "test do sistema"
-        ).Value;
-        _ofWork.MemberRepository.Create(member3);
-        var request = new CreatePostRequest(member3.Id, string.Empty,string.Empty,string.Empty);
+    {
+        var member = await _ofWork.MemberRepository.GetByEmail("joao@forjadev.com");
+        var request = new CreatePostRequest(member.Id, "teste","teste2","Teste3");
 
         var result = await _handler.Handle(request,CancellationToken.None);
         

@@ -11,7 +11,7 @@ namespace ForjaDev.Test.Mock;
 
 public class FakeUnitOfWork : IUnitOfWork
 {
-    public ICommentRepository CommentRepository { get; }
+    public ICommentRepository CommentRepository { get; } = new FakeCommentRepository();
     public IMemberRepository MemberRepository { get;} = new FakeMemberRepository();
     public IPostRepository PostRepository { get; } = new FakePostRepository();
     public IUserRepository UserRepository { get; } = new FakeUserRepository();
